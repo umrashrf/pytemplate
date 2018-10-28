@@ -1,3 +1,6 @@
+import io
+import subprocess
+
 from tkinter import (
     Frame,
     Button,
@@ -7,7 +10,10 @@ from tkinter import (
 class Application(Frame):
 
     def say_hi(self):
-        print("hi there, everyone!")
+        cmd = 'python -m bot hello'
+        process = subprocess.Popen(cmd, stdout=subprocess.PIPE)
+        for line in io.TextIOWrapper(process.stdout, encoding="utf-8"):
+            print(line)
 
     def createWidgets(self):
         close = Button(self)
